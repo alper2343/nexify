@@ -7,7 +7,7 @@
 <title>Hizmetlerimiz — Nexify</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 :root{
   --ink:   #faf9f5;
@@ -31,7 +31,7 @@
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;font-size:16px;}
-body{background:var(--ink);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+body{background:var(--ink);color:var(--text);font-family:'Open Sans',sans-serif;font-optical-sizing:auto;font-weight:500;font-variation-settings:"wdth" 100;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
 a{color:inherit;text-decoration:none;}
 button{cursor:pointer;font-family:inherit;}
 ::-webkit-scrollbar{width:3px;}
@@ -60,7 +60,7 @@ button{cursor:pointer;font-family:inherit;}
   border-bottom-color:rgba(201,100,66,.12);
 }
 .nav-logo-text{
-  font-family:'Plus Jakarta Sans',sans-serif;
+  font-family:'Open Sans',sans-serif;
   font-size:1.25rem;font-weight:800;
   letter-spacing:-.03em;color:var(--text);
 }
@@ -104,7 +104,7 @@ button{cursor:pointer;font-family:inherit;}
   position:relative;overflow:hidden;
 }
 .hero-intro{
-  font-size:1.05rem;font-weight:300;line-height:2;color:var(--sub);
+  font-size:1.05rem;font-weight:500;line-height:2;color:var(--sub);
   max-width:720px;margin-top:12px;
 }
 
@@ -131,7 +131,7 @@ button{cursor:pointer;font-family:inherit;}
 .svc-section:nth-child(even){background:var(--ink2);}
 
 .svc-text{
-  font-size:.92rem;font-weight:300;line-height:2;color:var(--sub);
+  font-size:.92rem;font-weight:500;line-height:2;color:var(--sub);
   margin-bottom:20px;
 }
 
@@ -182,7 +182,7 @@ button{cursor:pointer;font-family:inherit;}
 }
 
 .sticky-desc{
-  font-size:.9rem;font-weight:300;line-height:2;color:var(--sub);
+  font-size:.9rem;font-weight:500;line-height:2;color:var(--sub);
   margin-bottom:16px;max-width:480px;
 }
 
@@ -192,7 +192,7 @@ button{cursor:pointer;font-family:inherit;}
 .sticky-list li{
   display:flex;align-items:center;gap:12px;
   padding:10px 0;
-  font-size:.85rem;font-weight:400;line-height:1.6;color:var(--text);
+  font-size:.85rem;font-weight:600;line-height:1.6;color:var(--text);
   border-bottom:1px solid var(--fog);
 }
 .sticky-list li:last-child{border-bottom:none;}
@@ -290,7 +290,7 @@ button{cursor:pointer;font-family:inherit;}
   display:flex;align-items:flex-start;gap:14px;
   padding:14px 0;
   border-bottom:1px solid var(--fog);
-  font-size:.9rem;font-weight:400;line-height:1.7;color:var(--text);
+  font-size:.9rem;font-weight:600;line-height:1.7;color:var(--text);
   opacity:0;transform:translateX(-20px);
   transition:opacity .6s var(--ease),transform .6s var(--ease);
 }
@@ -333,7 +333,7 @@ button{cursor:pointer;font-family:inherit;}
 .bento-card.full{grid-column:1/-1;}
 .bento-ico{font-size:1.5rem;margin-bottom:14px;display:block;}
 .bento-title{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:8px;letter-spacing:-.01em;}
-.bento-desc{font-size:.82rem;font-weight:300;line-height:1.8;color:var(--sub);}
+.bento-desc{font-size:.82rem;font-weight:500;line-height:1.8;color:var(--sub);}
 
 /* ━━━ WHY US SECTION ━━━ */
 .why-block{
@@ -356,7 +356,7 @@ button{cursor:pointer;font-family:inherit;}
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .why-text{
-  font-size:.92rem;font-weight:300;line-height:2;color:var(--sub);
+  font-size:.92rem;font-weight:500;line-height:2;color:var(--sub);
   max-width:680px;
 }
 
@@ -366,7 +366,7 @@ button{cursor:pointer;font-family:inherit;}
   position:relative;
 }
 .cta-bottom-text{
-  font-size:1rem;font-weight:300;line-height:2;color:var(--sub);
+  font-size:1rem;font-weight:500;line-height:2;color:var(--sub);
   max-width:600px;margin:0 auto 36px;
 }
 .cta-btn{
@@ -462,7 +462,7 @@ button{cursor:pointer;font-family:inherit;}
   font-size:1.05rem;font-weight:700;color:var(--text);
   margin-bottom:6px;letter-spacing:-.01em;
 }
-.port-desc{font-size:.8rem;font-weight:300;line-height:1.7;color:var(--sub);}
+.port-desc{font-size:.8rem;font-weight:500;line-height:1.7;color:var(--sub);}
 .port-tags{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;}
 .port-tag{
   font-size:.64rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
@@ -481,7 +481,7 @@ button{cursor:pointer;font-family:inherit;}
 .ft{
   border-top:1px solid var(--fog);
   padding:28px 0;text-align:center;
-  font-size:.75rem;font-weight:400;color:var(--sub2);
+  font-size:.75rem;font-weight:500;color:var(--sub2);
 }
 
 /* ━━━ PREFERS REDUCED MOTION ━━━ */
