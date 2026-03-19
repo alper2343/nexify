@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Nexify — Web sitesi nasıl yapılır? Profesyonel bir web sitesinin temel bileşenlerini ve süreçlerini açıklıyoruz."/>
+<title>Yapım Aşaması — Nexify</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TOKENS — WARM LIGHT THEME
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+:root{
+  --ink:   #faf9f5;
+  --ink2:  #f5f4ee;
+  --ink3:  #ede9de;
+  --ink4:  #e9e6dc;
+  --fog:   rgba(61,57,41,.09);
+  --fog2:  rgba(61,57,41,.14);
+  --fog3:  rgba(61,57,41,.22);
+  --text:  #3d3929;
+  --sub:   rgba(61,57,41,.58);
+  --sub2:  rgba(61,57,41,.38);
+  --v:     #c96442;
+  --v2:    #d97757;
+  --v3:    #e8956d;
+  --b:     #9c87f5;
+  --b2:    #b3a2f7;
+  --teal:  #b05730;
+  --ease:  cubic-bezier(.23,1,.32,1);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BASE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--ink);color:var(--text);font-family:'Open Sans',sans-serif;font-optical-sizing:auto;font-weight:400;font-variation-settings:"wdth" 100;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+a{color:inherit;text-decoration:none;}
+button{cursor:pointer;font-family:inherit;}
+img,svg{display:block;}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:#f0ede4;}
+::-webkit-scrollbar-thumb{background:var(--v);border-radius:3px;}
+::selection{background:rgba(201,100,66,.22);color:var(--text);}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   NAV
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  padding:0 60px;height:70px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid transparent;
+  transition:all .45s var(--ease);
+}
+#nav.scrolled{
+  height:60px;
+  background:rgba(245,242,235,.96);
+  backdrop-filter:blur(28px) saturate(1.6);
+  -webkit-backdrop-filter:blur(28px) saturate(1.6);
+  border-bottom-color:rgba(201,100,66,.12);
+}
+.nav-logo-text{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:1.25rem;font-weight:800;
+  letter-spacing:-.03em;
+  color:var(--text);
+  text-decoration:none;
+}
+.nav-links{display:flex;align-items:center;gap:8px;}
+.nav-mid{
+  position:relative;z-index:0;
+  display:inline-flex;align-items:center;justify-content:center;
+  overflow:hidden;white-space:nowrap;
+  border:1px solid rgba(61,57,41,.18);
+  border-radius:100px;
+  background:rgba(61,57,41,.06);
+  padding:7px 16px;
+  font-size:.82rem;font-weight:600;letter-spacing:.02em;
+  color:var(--text);
+  transition:all .35s var(--ease);
+}
+.nav-mid:hover{
+  background:rgba(61,57,41,.12);
+  border-color:rgba(61,57,41,.28);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LAYOUT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.sec{position:relative;z-index:2;overflow:hidden;}
+.wrap{max-width:1240px;margin:0 auto;padding:0 60px;}
+
+.stag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.66rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--v2);margin-bottom:22px;
+}
+.stag::before{content:'';width:22px;height:1px;background:linear-gradient(90deg,var(--v2),transparent);}
+
+.s-h{
+  font-size:clamp(2.8rem,5.2vw,5.6rem);
+  font-weight:800;line-height:.92;letter-spacing:-.04em;
+  color:var(--text);margin-bottom:20px;
+}
+.s-h .acc{
+  font-family:'Instrument Serif',serif;
+  font-weight:400;font-style:italic;
+  background:linear-gradient(135deg,var(--v2),var(--b2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.s-p{font-size:.96rem;font-weight:500;line-height:1.9;color:var(--sub);max-width:480px;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   WEB BİLGİ BÖLÜMÜ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#webinfo{background:var(--ink);padding:140px 0 100px;}
+
+.wi-topic{
+  display:grid;grid-template-columns:56px 1fr;gap:0 28px;
+  padding:32px 0;border-bottom:1px solid var(--fog);align-items:start;
+  position:relative;cursor:default;
+  transition:padding-left .35s var(--ease);
+}
+.wi-topic:first-child{border-top:1px solid var(--fog);}
+.wi-topic::before{
+  content:'';position:absolute;left:-20px;top:0;bottom:0;width:3px;
+  background:linear-gradient(to bottom,var(--v),var(--b));
+  transform:scaleY(0);transform-origin:top;
+  transition:transform .4s var(--ease);border-radius:3px;
+}
+.wi-topic:hover{padding-left:8px;}
+.wi-topic:hover::before{transform:scaleY(1);}
+.wi-topic-num{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:2.8rem;font-weight:400;line-height:1;
+  color:rgba(201,100,66,.2);padding-top:2px;text-align:right;
+  transition:color .35s var(--ease);
+}
+.wi-topic:hover .wi-topic-num{color:var(--v);}
+.wi-topic-head{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+.wi-topic-ico{
+  width:38px;height:38px;min-width:38px;border-radius:11px;
+  background:rgba(201,100,66,.08);border:1px solid rgba(201,100,66,.18);
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+  transition:all .3s var(--ease);
+}
+.wi-topic:hover .wi-topic-ico{
+  background:rgba(201,100,66,.16);border-color:rgba(201,100,66,.38);
+  box-shadow:0 0 18px rgba(201,100,66,.18);
+}
+.wi-topic-title{font-size:1.05rem;font-weight:800;color:var(--text);letter-spacing:-.01em;}
+.wi-topic-desc{
+  font-size:.9rem;font-weight:500;line-height:1.82;color:var(--sub);
+  max-height:0;overflow:hidden;opacity:0;
+  transition:max-height .5s var(--ease),opacity .4s,margin .3s;
+}
+.wi-topic.open .wi-topic-desc{max-height:280px;opacity:1;margin-top:6px;}
+.wi-topic-btn{
+  margin-top:10px;font-size:.7rem;font-weight:700;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--v);
+  display:inline-flex;align-items:center;gap:5px;
+  opacity:0;transform:translateX(-6px);
+  transition:opacity .3s,transform .3s;cursor:pointer;
+}
+.wi-topic:hover .wi-topic-btn{opacity:1;transform:translateX(0);}
+.wi-topic-arr{transition:transform .3s var(--ease);}
+.wi-topic.open .wi-topic-arr{transform:rotate(90deg);}
+
+.wi-feats{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.wi-feat{
+  background:var(--ink3);border:1px solid var(--fog);border-radius:18px;
+  padding:22px 18px;position:relative;overflow:hidden;
+  transition:border-color .35s var(--ease),transform .35s var(--ease),box-shadow .35s var(--ease);
+}
+.wi-feat::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at var(--wmx,50%) var(--wmy,50%),rgba(201,100,66,.08),transparent 58%);
+  opacity:0;transition:opacity .4s;
+}
+.wi-feat::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,100,66,.4),rgba(156,135,245,.3),transparent);
+  opacity:0;transition:opacity .35s;
+}
+.wi-feat:hover{border-color:rgba(201,100,66,.28);transform:translateY(-4px);box-shadow:0 18px 44px rgba(61,57,41,.1);}
+.wi-feat:hover::before,.wi-feat:hover::after{opacity:1;}
+.wi-feat-ico{font-size:1.5rem;margin-bottom:12px;display:block;}
+.wi-feat-title{font-size:.95rem;font-weight:800;color:var(--text);margin-bottom:7px;letter-spacing:-.01em;}
+.wi-feat-desc{font-size:.84rem;font-weight:500;line-height:1.7;color:var(--sub);}
+.wi-feat-badge{
+  display:inline-flex;align-items:center;gap:4px;margin-top:10px;
+  font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--v);background:rgba(201,100,66,.08);border:1px solid rgba(201,100,66,.18);
+  padding:3px 9px;border-radius:100px;
+}
+
+.wi-proc{margin-top:80px;}
+.wi-proc-h{
+  font-size:1.7rem;font-weight:800;letter-spacing:-.03em;
+  color:var(--text);margin-bottom:48px;text-align:center;
+}
+.wi-proc-h span{
+  font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;
+  background:linear-gradient(135deg,var(--v),var(--b));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.wi-steps{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:0;
+  position:relative;
+}
+.wi-steps::before{
+  content:'';position:absolute;top:26px;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,100,66,.3),rgba(156,135,245,.25),transparent);
+}
+.wi-step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 8px;position:relative;z-index:1;}
+.wi-step-num{
+  width:52px;height:52px;border-radius:50%;
+  background:var(--ink3);border:1px solid rgba(201,100,66,.22);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:1.2rem;color:var(--v);margin-bottom:14px;
+  transition:all .35s var(--ease);position:relative;
+}
+.wi-step-num::after{
+  content:'';position:absolute;inset:-4px;border-radius:50%;
+  border:1px solid rgba(201,100,66,.12);
+  animation:wiPulse 3s ease-in-out infinite;
+}
+.wi-step:nth-child(2) .wi-step-num::after{animation-delay:.5s;}
+.wi-step:nth-child(3) .wi-step-num::after{animation-delay:1s;}
+.wi-step:nth-child(4) .wi-step-num::after{animation-delay:1.5s;}
+.wi-step:nth-child(5) .wi-step-num::after{animation-delay:2s;}
+@keyframes wiPulse{0%,100%{opacity:.25;transform:scale(1)}50%{opacity:.65;transform:scale(1.1)}}
+.wi-step:hover .wi-step-num{
+  background:rgba(201,100,66,.1);border-color:var(--v);
+  box-shadow:0 0 22px rgba(201,100,66,.2);
+}
+.wi-step-lbl{font-size:.8rem;font-weight:800;color:var(--text);margin-bottom:4px;letter-spacing:-.01em;}
+.wi-step-sub{font-size:.72rem;font-weight:500;color:var(--sub2);line-height:1.5;}
+
+.wi-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SCROLL REVEAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.sr{opacity:0;transform:translateY(34px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.sr.on{opacity:1;transform:none;}
+.sr-l{opacity:0;transform:translateX(-32px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.sr-l.on{opacity:1;transform:none;}
+.sr-r{opacity:0;transform:translateX(32px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.sr-r.on{opacity:1;transform:none;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BACK BUTTON
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.82rem;font-weight:600;letter-spacing:.02em;
+  color:var(--v);
+  padding:7px 16px;
+  border:1px solid rgba(201,100,66,.22);
+  border-radius:100px;
+  background:rgba(201,100,66,.06);
+  transition:all .35s var(--ease);
+}
+.back-btn:hover{
+  background:rgba(201,100,66,.14);
+  border-color:rgba(201,100,66,.38);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESPONSIVE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media(max-width:1100px){
+  .wi-layout{grid-template-columns:1fr;gap:52px;}
+  .wi-steps{grid-template-columns:repeat(3,1fr);gap:28px 0;}
+  .wi-steps::before{display:none;}
+  #webinfo{padding:96px 0;}
+  .wrap{padding:0 40px;}
+  #nav,#nav.scrolled{padding:0 40px;}
+}
+@media(max-width:720px){
+  .wi-feats{grid-template-columns:1fr;}
+  .wi-steps{grid-template-columns:repeat(2,1fr);gap:24px 0;}
+  .wi-topic{grid-template-columns:40px 1fr;gap:0 16px;}
+  .wi-topic-num{font-size:2rem;}
+  .wi-topic-desc{font-size:.82rem;}
+  .wrap{padding:0 24px;}
+  #nav,#nav.scrolled{padding:0 24px;}
+  .s-h{font-size:clamp(2.2rem,8vw,3.2rem);}
+  .s-p{font-size:.88rem;}
+  #webinfo{padding:80px 0;}
+  .wi-proc{margin-top:48px;}
+  .wi-proc-h{font-size:1.3rem;margin-bottom:28px;}
+  .wi-step-num{width:42px;height:42px;font-size:1rem;}
+  .wi-step-lbl{font-size:.72rem;}
+  .wi-step-sub{font-size:.62rem;}
+  .wi-feat{padding:18px 14px;}
+  .wi-feat-ico{font-size:1.3rem;margin-bottom:8px;}
+  .wi-feat-title{font-size:.85rem;}
+  .wi-feat-desc{font-size:.75rem;}
+  .back-btn{font-size:.75rem;padding:6px 12px;}
+  .nav-logo-text{font-size:1.1rem;}
+}
+@media(max-width:480px){
+  .wrap{padding:0 18px;}
+  #nav,#nav.scrolled{padding:0 18px;}
+  .s-h{font-size:clamp(1.9rem,8vw,2.6rem);}
+  .wi-steps{grid-template-columns:1fr;gap:20px 0;}
+  .wi-topic{grid-template-columns:32px 1fr;gap:0 12px;}
+  .wi-topic-num{font-size:1.6rem;}
+  .wi-topic-ico{width:32px;height:32px;min-width:32px;font-size:.85rem;border-radius:9px;}
+  .wi-topic-title{font-size:.9rem;}
+}
+@media(prefers-reduced-motion:reduce){
+  .sr,.sr-l,.sr-r{opacity:1;transform:none;transition:none;}
+  .wi-step-num::after{animation:none;}
+  .letter-swap .ls-letter,.letter-swap .ls-clone{transition:none !important;}
+}
+
+/* ━━━ LETTER SWAP ANİMASYON ━━━ */
+.letter-swap{
+  display:inline-flex;overflow:hidden;cursor:default;
+}
+.letter-swap .ls-char{
+  position:relative;display:inline-flex;flex-direction:column;overflow:hidden;
+}
+.letter-swap .ls-letter,
+.letter-swap .ls-clone{
+  display:block;
+  transition:transform .4s cubic-bezier(.22,1,.36,1);
+  will-change:transform;
+}
+.letter-swap .ls-clone{
+  position:absolute;top:0;left:0;
+  transform:translateY(-110%);
+}
+.letter-swap:hover .ls-letter{
+  transform:translateY(110%);
+}
+.letter-swap:hover .ls-clone{
+  transform:translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ NAV ══════════════ -->
+<nav id="nav">
+  <a href="nexify-website.html" class="nav-logo-text">nexify</a>
+  <div class="nav-links">
+    <a href="nexify-website.html" class="back-btn">← Ana Sayfa</a>
+  </div>
+</nav>
+
+<!-- ══════════════ WEB BİLGİ ══════════════ -->
+<div id="webinfo" class="sec">
+  <div class="wrap">
+    <div class="stag sr">Bilgi Merkezi</div>
+    <h2 class="s-h sr">Web Sitesi <span class="acc">Nasıl Yapılır?</span></h2>
+    <p class="s-p sr" style="margin-bottom:72px;">Profesyonel bir web sitesinin temel bileşenlerini ve süreçlerini sizin için açıklıyoruz.</p>
+
+    <div class="wi-layout">
+
+      <!-- Sol: Accordion konu listesi -->
+      <div class="sr-l">
+
+        <div class="wi-topic">
+          <div class="wi-topic-num">01</div>
+          <div>
+            <div class="wi-topic-head">
+              <div class="wi-topic-ico">🌐</div>
+              <div class="wi-topic-title">Domain — Alan Adı</div>
+            </div>
+            <div class="wi-topic-desc">Domain, sitenizin internet üzerindeki adresidir. Örneğin <strong>nexify.com</strong> bir domain'dir. Kısa, akılda kalıcı ve markanızla uyumlu olması çok önemlidir. .com, .com.tr, .net gibi uzantılar arasından seçim yapabilirsiniz. Yıllık olarak kiralanır, fiyatlar genellikle 100–500₺ arasındadır.</div>
+            <div class="wi-topic-btn" onclick="wiToggle(this)"><span>Daha Fazla</span><span class="wi-topic-arr">→</span></div>
+          </div>
+        </div>
+
+        <div class="wi-topic">
+          <div class="wi-topic-num">02</div>
+          <div>
+            <div class="wi-topic-head">
+              <div class="wi-topic-ico">🖥️</div>
+              <div class="wi-topic-title">Hosting — Web Barındırma</div>
+            </div>
+            <div class="wi-topic-desc">Hosting, web sitenizin dosyalarının 7/24 erişilebilir bir sunucuda barındırılmasıdır. Shared hosting, VPS ve Cloud hosting gibi seçenekler mevcuttur. Sitenizin hızı ve güvenilirliği büyük ölçüde hosting kalitesiyle doğrudan ilgilidir. Nexify, projenize en uygun planı seçmenizde yardımcı olur.</div>
+            <div class="wi-topic-btn" onclick="wiToggle(this)"><span>Daha Fazla</span><span class="wi-topic-arr">→</span></div>
+          </div>
+        </div>
+
+        <div class="wi-topic">
+          <div class="wi-topic-num">03</div>
+          <div>
+            <div class="wi-topic-head">
+              <div class="wi-topic-ico">🔒</div>
+              <div class="wi-topic-title">SSL Sertifikası</div>
+            </div>
+            <div class="wi-topic-desc">SSL, sitenizde <strong>https://</strong> ve kilit simgesi görünmesini sağlayan güvenlik protokolüdür. Ziyaretçi ile sunucu arasındaki veri iletimini şifreler. Google, SSL'siz siteleri arama sonuçlarında geri düşürür. Tüm Nexify projelerinde SSL ücretsiz olarak aktive edilir.</div>
+            <div class="wi-topic-btn" onclick="wiToggle(this)"><span>Daha Fazla</span><span class="wi-topic-arr">→</span></div>
+          </div>
+        </div>
+
+        <div class="wi-topic">
+          <div class="wi-topic-num">04</div>
+          <div>
+            <div class="wi-topic-head">
+              <div class="wi-topic-ico">📈</div>
+              <div class="wi-topic-title">SEO — Arama Motoru Optimizasyonu</div>
+            </div>
+            <div class="wi-topic-desc">SEO, sitenizin Google'da üst sıralarda çıkmasını sağlayan tekniklerin bütünüdür. Teknik SEO (sayfa hızı, mobil uyumluluk), içerik SEO (doğru anahtar kelimeler) ve link building olmak üzere üç temel boyutu vardır. İyi bir SEO çalışması organik trafik sağlar ve reklam maliyetlerinizi düşürür.</div>
+            <div class="wi-topic-btn" onclick="wiToggle(this)"><span>Daha Fazla</span><span class="wi-topic-arr">→</span></div>
+          </div>
+        </div>
+
+        <div class="wi-topic">
+          <div class="wi-topic-num">05</div>
+          <div>
+            <div class="wi-topic-head">
+              <div class="wi-topic-ico">📱</div>
+              <div class="wi-topic-title">Mobil Uyumluluk</div>
+            </div>
+            <div class="wi-topic-desc">Türkiye'de internet trafiğinin %70'inden fazlası mobil cihazlardan gelmektedir. Responsive tasarım, sitenizin telefon, tablet ve masaüstünde otomatik uyum sağlamasıdır. Google mobil uyumlu olmayan siteleri cezalandırır. Tüm Nexify projeleri %100 mobil uyumlu teslim edilir.</div>
+            <div class="wi-topic-btn" onclick="wiToggle(this)"><span>Daha Fazla</span><span class="wi-topic-arr">→</span></div>
+          </div>
+        </div>
+
+        <div class="wi-topic">
+          <div class="wi-topic-num">06</div>
+          <div>
+            <div class="wi-topic-head">
+              <div class="wi-topic-ico">⚡</div>
+              <div class="wi-topic-title">Sayfa Hızı ve Performans</div>
+            </div>
+            <div class="wi-topic-desc">Bir sayfa 3 saniyeden uzun yüklenirse kullanıcıların %53'ü terk eder. Google PageSpeed skoru hem kullanıcı deneyimini hem de SEO sıralamanızı doğrudan etkiler. Görsel optimizasyonu, önbellekleme ve CDN kullanımı ile sitenizi hızlandırıyoruz.</div>
+            <div class="wi-topic-btn" onclick="wiToggle(this)"><span>Daha Fazla</span><span class="wi-topic-arr">→</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sağ: Feature kartlar -->
+      <div class="sr-r">
+        <div class="wi-feats">
+
+          <div class="wi-feat">
+            <span class="wi-feat-ico">🛡️</span>
+            <div class="wi-feat-title">Güvenlik</div>
+            <div class="wi-feat-desc">SSL, güvenlik duvarı ve düzenli yedekleme ile sitenizi koruma altına alıyoruz.</div>
+            <div class="wi-feat-badge">✓ Dahil</div>
+          </div>
+
+          <div class="wi-feat">
+            <span class="wi-feat-ico">🚀</span>
+            <div class="wi-feat-title">Hız Optimizasyonu</div>
+            <div class="wi-feat-desc">CDN, görsel sıkıştırma ve önbellekleme ile Google PageSpeed 90+ hedefliyoruz.</div>
+            <div class="wi-feat-badge">✓ Dahil</div>
+          </div>
+
+          <div class="wi-feat">
+            <span class="wi-feat-ico">📊</span>
+            <div class="wi-feat-title">Analitik & Takip</div>
+            <div class="wi-feat-desc">Google Analytics ve Search Console entegrasyonu ile ziyaretçileri izleyin.</div>
+            <div class="wi-feat-badge">✓ Dahil</div>
+          </div>
+
+          <div class="wi-feat">
+            <span class="wi-feat-ico">🔍</span>
+            <div class="wi-feat-title">Temel SEO</div>
+            <div class="wi-feat-desc">Meta etiketler, schema markup ve teknik SEO altyapısı teslimatta hazır gelir.</div>
+            <div class="wi-feat-badge">✓ Dahil</div>
+          </div>
+
+          <div class="wi-feat">
+            <span class="wi-feat-ico">☁️</span>
+            <div class="wi-feat-title">Hosting Danışmanlığı</div>
+            <div class="wi-feat-desc">Sitenize en uygun hosting planını birlikte seçiyor, kurulumu yapıyoruz.</div>
+            <div class="wi-feat-badge">✓ Dahil</div>
+          </div>
+
+          <div class="wi-feat">
+            <span class="wi-feat-ico">🌐</span>
+            <div class="wi-feat-title">Domain Yönetimi</div>
+            <div class="wi-feat-desc">Domain seçimi, DNS ayarları ve alan adı yönlendirmelerini sizin için yapılandırıyoruz.</div>
+            <div class="wi-feat-badge">✓ Dahil</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Süreç adımları -->
+    <div class="wi-proc">
+      <div class="wi-proc-h sr">Siteniz <span>Nasıl Yapılır?</span></div>
+      <div class="wi-steps">
+        <div class="wi-step sr" style="transition-delay:.05s">
+          <div class="wi-step-num">1</div>
+          <div class="wi-step-lbl">Keşif & Brifing</div>
+          <div class="wi-step-sub">Hedeflerinizi ve beklentilerinizi anlıyoruz</div>
+        </div>
+        <div class="wi-step sr" style="transition-delay:.12s">
+          <div class="wi-step-num">2</div>
+          <div class="wi-step-lbl">Tasarım</div>
+          <div class="wi-step-sub">Markanıza özel görsel kimlik</div>
+        </div>
+        <div class="wi-step sr" style="transition-delay:.19s">
+          <div class="wi-step-num">3</div>
+          <div class="wi-step-lbl">Geliştirme</div>
+          <div class="wi-step-sub">Hızlı, güvenli ve SEO uyumlu kod</div>
+        </div>
+        <div class="wi-step sr" style="transition-delay:.26s">
+          <div class="wi-step-num">4</div>
+          <div class="wi-step-lbl">Test & Revizyon</div>
+          <div class="wi-step-sub">Kapsamlı test ve ince ayar</div>
+        </div>
+        <div class="wi-step sr" style="transition-delay:.33s">
+          <div class="wi-step-num">5</div>
+          <div class="wi-step-lbl">Yayınlama</div>
+          <div class="wi-step-sub">Domain, hosting, SSL ve canlıya alma</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ── Nav scroll ── */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>30);});
+
+/* ── Scroll reveal ── */
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});
+},{threshold:.15});
+document.querySelectorAll('.sr,.sr-l,.sr-r').forEach(el=>obs.observe(el));
+
+/* ── Web bilgi accordion ── */
+function wiToggle(btn){
+  const topic = btn.closest('.wi-topic');
+  if(!topic) return;
+  const isOpen = topic.classList.contains('open');
+  document.querySelectorAll('.wi-topic.open').forEach(t=>t.classList.remove('open'));
+  if(!isOpen) topic.classList.add('open');
+  btn.querySelector('span:first-child').textContent = topic.classList.contains('open') ? 'Kapat' : 'Daha Fazla';
+}
+
+/* ── wi-feat mouse glow ── */
+document.querySelectorAll('.wi-feat').forEach(c=>{
+  c.addEventListener('mousemove',e=>{
+    const r=c.getBoundingClientRect();
+    c.style.setProperty('--wmx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
+    c.style.setProperty('--wmy',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
+  });
+});
+
+/* ── Letter Swap Animation ── */
+(function(){
+  function initLetterSwap(el){
+    const text=el.textContent.trim();
+    if(!text)return;
+    el.classList.add('letter-swap');
+    el.innerHTML='';
+    for(let i=0;i<text.length;i++){
+      const ch=text[i];
+      const span=document.createElement('span');
+      span.className='ls-char';
+      // stagger delay per letter
+      const delay=(i*0.025)+'s';
+      const letter=document.createElement('span');
+      letter.className='ls-letter';
+      letter.textContent=ch===''?' ':ch;
+      letter.style.transitionDelay=delay;
+      const clone=document.createElement('span');
+      clone.className='ls-clone';
+      clone.textContent=ch===''?' ':ch;
+      clone.style.transitionDelay=delay;
+      clone.setAttribute('aria-hidden','true');
+      span.appendChild(letter);
+      span.appendChild(clone);
+      el.appendChild(span);
+    }
+  }
+  document.querySelectorAll('.wi-topic-title,.wi-feat-title,.wi-step-lbl,.wi-proc-h').forEach(el=>{
+    // wi-proc-h has inner <span> with gradient text — handle differently
+    if(el.classList.contains('wi-proc-h')){
+      el.querySelectorAll('span').forEach(s=>initLetterSwap(s));
+      // also process the text nodes before span
+      const nodes=el.childNodes;
+      for(let n=0;n<nodes.length;n++){
+        if(nodes[n].nodeType===3&&nodes[n].textContent.trim()){
+          const wrapper=document.createElement('span');
+          wrapper.className='letter-swap';
+          const text=nodes[n].textContent;
+          nodes[n].replaceWith(wrapper);
+          for(let i=0;i<text.length;i++){
+            const ch=text[i];
+            const span=document.createElement('span');
+            span.className='ls-char';
+            const delay=(i*0.025)+'s';
+            const letter=document.createElement('span');
+            letter.className='ls-letter';
+            letter.textContent=ch===''?' ':ch;
+            letter.style.transitionDelay=delay;
+            const clone=document.createElement('span');
+            clone.className='ls-clone';
+            clone.textContent=ch===''?' ':ch;
+            clone.style.transitionDelay=delay;
+            clone.setAttribute('aria-hidden','true');
+            span.appendChild(letter);
+            span.appendChild(clone);
+            wrapper.appendChild(span);
+          }
+        }
+      }
+    }else{
+      initLetterSwap(el);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

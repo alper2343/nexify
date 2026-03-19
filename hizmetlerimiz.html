@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Nexify — Profesyonel web sitesi tasarımı, QR kod menü sistemi ve dijital çözümler."/>
+<title>Hizmetlerimiz — Nexify</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:   #faf9f5;
+  --ink2:  #f5f4ee;
+  --ink3:  #ede9de;
+  --ink4:  #e9e6dc;
+  --fog:   rgba(61,57,41,.09);
+  --fog2:  rgba(61,57,41,.14);
+  --fog3:  rgba(61,57,41,.22);
+  --text:  #3d3929;
+  --sub:   rgba(61,57,41,.58);
+  --sub2:  rgba(61,57,41,.38);
+  --v:     #c96442;
+  --v2:    #d97757;
+  --v3:    #e8956d;
+  --b:     #9c87f5;
+  --b2:    #b3a2f7;
+  --teal:  #b05730;
+  --ease:  cubic-bezier(.23,1,.32,1);
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--ink);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+a{color:inherit;text-decoration:none;}
+button{cursor:pointer;font-family:inherit;}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:#f0ede4;}
+::-webkit-scrollbar-thumb{background:var(--v);border-radius:3px;}
+::selection{background:rgba(201,100,66,.22);color:var(--text);}
+
+/* ── Noise overlay ── */
+.noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.012;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23f)'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;}
+
+/* ━━━ NAV ━━━ */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  padding:0 60px;height:70px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid transparent;
+  transition:all .45s var(--ease);
+}
+#nav.scrolled{
+  height:60px;
+  background:rgba(245,242,235,.96);
+  backdrop-filter:blur(28px) saturate(1.6);
+  -webkit-backdrop-filter:blur(28px) saturate(1.6);
+  border-bottom-color:rgba(201,100,66,.12);
+}
+.nav-logo-text{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:1.25rem;font-weight:800;
+  letter-spacing:-.03em;color:var(--text);
+}
+.nav-links{display:flex;align-items:center;gap:8px;}
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.82rem;font-weight:600;letter-spacing:.02em;
+  color:var(--v);padding:7px 16px;
+  border:1px solid rgba(201,100,66,.22);
+  border-radius:100px;
+  background:rgba(201,100,66,.06);
+  transition:all .35s var(--ease);
+}
+.back-btn:hover{background:rgba(201,100,66,.14);border-color:rgba(201,100,66,.38);}
+
+/* ━━━ LAYOUT ━━━ */
+.wrap{max-width:1240px;margin:0 auto;padding:0 60px;}
+.stag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.66rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--v2);margin-bottom:22px;
+}
+.stag::before{content:'';width:22px;height:1px;background:linear-gradient(90deg,var(--v2),transparent);}
+
+.s-h{
+  font-size:clamp(2.8rem,5.2vw,5.6rem);
+  font-weight:800;line-height:.92;letter-spacing:-.04em;
+  color:var(--text);margin-bottom:20px;
+}
+.s-h .acc{
+  font-family:'Instrument Serif',serif;
+  font-weight:400;font-style:italic;
+  background:linear-gradient(135deg,var(--v2),var(--b2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* ━━━ HERO SECTION ━━━ */
+.hero{
+  padding:180px 0 120px;
+  position:relative;overflow:hidden;
+}
+.hero-intro{
+  font-size:1.05rem;font-weight:300;line-height:2;color:var(--sub);
+  max-width:720px;margin-top:12px;
+}
+
+/* Floating shapes */
+.hero-shape{
+  position:absolute;border-radius:50%;pointer-events:none;opacity:0;
+  animation:shapeIn 1.8s var(--ease) forwards,shapeFloat 8s ease-in-out infinite;
+}
+.hs1{width:300px;height:300px;right:-80px;top:60px;background:radial-gradient(circle,rgba(201,100,66,.06),transparent 70%);animation-delay:.3s,.3s;}
+.hs2{width:200px;height:200px;left:-60px;bottom:0;background:radial-gradient(circle,rgba(156,135,245,.06),transparent 70%);animation-delay:.5s,.5s;}
+.hs3{width:160px;height:160px;right:20%;top:30%;background:radial-gradient(circle,rgba(201,100,66,.04),transparent 70%);animation-delay:.7s,.7s;}
+@keyframes shapeIn{from{opacity:0;transform:scale(.6) translateY(40px);}to{opacity:1;transform:scale(1) translateY(0);}}
+@keyframes shapeFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-20px);}}
+
+/* ━━━ DIVIDER ━━━ */
+.divider{
+  width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,100,66,.2),rgba(156,135,245,.15),transparent);
+  margin:0 auto;
+}
+
+/* ━━━ SERVICE SECTIONS ━━━ */
+.svc-section{padding:120px 0;position:relative;}
+.svc-section:nth-child(even){background:var(--ink2);}
+
+.svc-text{
+  font-size:.92rem;font-weight:300;line-height:2;color:var(--sub);
+  margin-bottom:20px;
+}
+
+/* ━━━ STICKY SCROLL REVEAL ━━━ */
+.sticky-section{
+  padding:140px 0;
+  position:relative;
+  background:var(--ink);
+}
+.sticky-wrap{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:start;
+}
+
+/* Sol: scroll eden içerikler */
+.sticky-left{position:relative;}
+.sticky-item{
+  min-height:70vh;
+  padding:60px 0;
+  display:flex;flex-direction:column;justify-content:center;
+  opacity:.15;
+  transition:opacity .6s var(--ease);
+}
+.sticky-item.active{opacity:1;}
+.sticky-item:first-child{padding-top:0;}
+.sticky-item:last-child{min-height:50vh;}
+
+.sticky-ico{
+  width:56px;height:56px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(201,100,66,.1),rgba(156,135,245,.08));
+  border:1px solid rgba(201,100,66,.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;margin-bottom:24px;
+  transition:all .5s var(--ease);
+}
+.sticky-item.active .sticky-ico{
+  background:linear-gradient(135deg,rgba(201,100,66,.18),rgba(156,135,245,.14));
+  border-color:rgba(201,100,66,.35);
+  box-shadow:0 8px 28px rgba(201,100,66,.18);
+  transform:scale(1.05);
+}
+
+.sticky-title{
+  font-size:1.5rem;font-weight:800;letter-spacing:-.03em;
+  color:var(--text);margin-bottom:16px;line-height:1.2;
+}
+
+.sticky-desc{
+  font-size:.9rem;font-weight:300;line-height:2;color:var(--sub);
+  margin-bottom:16px;max-width:480px;
+}
+
+.sticky-list{
+  list-style:none;margin:12px 0 0;padding:0;
+}
+.sticky-list li{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 0;
+  font-size:.85rem;font-weight:400;line-height:1.6;color:var(--text);
+  border-bottom:1px solid var(--fog);
+}
+.sticky-list li:last-child{border-bottom:none;}
+.sticky-list li::before{
+  content:'✓';
+  width:24px;height:24px;min-width:24px;border-radius:50%;
+  background:rgba(201,100,66,.08);border:1px solid rgba(201,100,66,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;color:var(--v);
+}
+
+/* Sağ: Sticky kart */
+.sticky-right{
+  position:sticky;
+  top:140px;
+  height:fit-content;
+}
+
+.sticky-card{
+  border-radius:24px;
+  overflow:hidden;
+  position:relative;
+  min-height:340px;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .8s var(--ease),box-shadow .8s var(--ease);
+  background:linear-gradient(135deg,rgba(201,100,66,.12),rgba(156,135,245,.1));
+  border:1px solid rgba(201,100,66,.18);
+  box-shadow:0 20px 60px rgba(61,57,41,.1);
+}
+.sticky-card-glow{
+  position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 30%,rgba(201,100,66,.12),transparent 60%);
+  transition:opacity .8s;
+  pointer-events:none;
+}
+
+.sticky-card-content{
+  position:relative;z-index:1;
+  text-align:center;padding:48px 36px;
+  transition:opacity .4s var(--ease),transform .4s var(--ease);
+}
+.sticky-card-content.switching{
+  opacity:0;transform:translateY(12px);
+}
+
+.sticky-card-ico{
+  font-size:3rem;margin-bottom:20px;
+  display:block;
+  animation:stickyFloat 4s ease-in-out infinite;
+}
+@keyframes stickyFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+.sticky-card-label{
+  font-size:1.15rem;font-weight:800;letter-spacing:-.02em;
+  color:var(--text);margin-bottom:24px;
+}
+
+.sticky-card-features{
+  display:flex;flex-direction:column;gap:10px;
+  align-items:flex-start;
+  max-width:220px;margin:0 auto;
+}
+.scf-item{
+  display:flex;align-items:center;gap:10px;
+  font-size:.8rem;font-weight:500;color:var(--text);
+}
+.scf-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:linear-gradient(135deg,var(--v),var(--b));
+  display:inline-block;
+  box-shadow:0 0 10px rgba(201,100,66,.3);
+}
+
+/* Sticky card renk varyasyonları */
+.sticky-card[data-theme="0"]{
+  background:linear-gradient(135deg,rgba(201,100,66,.1),rgba(156,135,245,.08));
+  border-color:rgba(201,100,66,.18);
+}
+.sticky-card[data-theme="1"]{
+  background:linear-gradient(135deg,rgba(156,135,245,.12),rgba(201,100,66,.08));
+  border-color:rgba(156,135,245,.22);
+}
+.sticky-card[data-theme="2"]{
+  background:linear-gradient(135deg,rgba(201,100,66,.14),rgba(232,149,109,.1));
+  border-color:rgba(201,100,66,.25);
+}
+.sticky-card[data-theme="3"]{
+  background:linear-gradient(135deg,rgba(176,87,48,.1),rgba(156,135,245,.12));
+  border-color:rgba(176,87,48,.2);
+}
+
+/* ━━━ FEATURE LIST (QR advantages) ━━━ */
+.feat-list{list-style:none;margin:24px 0;}
+.feat-list li{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:14px 0;
+  border-bottom:1px solid var(--fog);
+  font-size:.9rem;font-weight:400;line-height:1.7;color:var(--text);
+  opacity:0;transform:translateX(-20px);
+  transition:opacity .6s var(--ease),transform .6s var(--ease);
+}
+.feat-list li.on{opacity:1;transform:none;}
+.feat-list li:last-child{border-bottom:none;}
+.feat-check{
+  width:28px;height:28px;min-width:28px;border-radius:50%;
+  background:rgba(201,100,66,.08);border:1px solid rgba(201,100,66,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;color:var(--v);margin-top:2px;
+  transition:all .3s var(--ease);
+}
+.feat-list li:hover .feat-check{
+  background:rgba(201,100,66,.18);border-color:var(--v);
+  box-shadow:0 0 16px rgba(201,100,66,.2);
+}
+
+/* ━━━ BENTO CARDS ━━━ */
+.bento{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+  margin-top:48px;
+}
+.bento-card{
+  background:var(--ink3);border:1px solid var(--fog);border-radius:22px;
+  padding:32px 28px;position:relative;overflow:hidden;
+  transition:all .4s var(--ease);
+}
+.bento-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(201,100,66,.08),transparent 60%);
+  opacity:0;transition:opacity .4s;
+}
+.bento-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,100,66,.35),rgba(156,135,245,.25),transparent);
+  opacity:0;transition:opacity .35s;
+}
+.bento-card:hover{border-color:rgba(201,100,66,.25);transform:translateY(-5px);box-shadow:0 20px 48px rgba(61,57,41,.1);}
+.bento-card:hover::before,.bento-card:hover::after{opacity:1;}
+.bento-card.full{grid-column:1/-1;}
+.bento-ico{font-size:1.5rem;margin-bottom:14px;display:block;}
+.bento-title{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:8px;letter-spacing:-.01em;}
+.bento-desc{font-size:.82rem;font-weight:300;line-height:1.8;color:var(--sub);}
+
+/* ━━━ WHY US SECTION ━━━ */
+.why-block{
+  background:var(--ink2);border:1px solid var(--fog);border-radius:28px;
+  padding:56px 48px;margin-top:60px;
+  position:relative;overflow:hidden;
+}
+.why-block::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(201,100,66,.03),rgba(156,135,245,.03));
+  pointer-events:none;
+}
+.why-title{
+  font-size:1.5rem;font-weight:800;letter-spacing:-.03em;
+  color:var(--text);margin-bottom:20px;
+}
+.why-title span{
+  font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;
+  background:linear-gradient(135deg,var(--v),var(--b));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.why-text{
+  font-size:.92rem;font-weight:300;line-height:2;color:var(--sub);
+  max-width:680px;
+}
+
+/* ━━━ CTA BOTTOM ━━━ */
+.cta-bottom{
+  padding:120px 0;text-align:center;
+  position:relative;
+}
+.cta-bottom-text{
+  font-size:1rem;font-weight:300;line-height:2;color:var(--sub);
+  max-width:600px;margin:0 auto 36px;
+}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 36px;border-radius:100px;
+  background:linear-gradient(135deg,var(--v),var(--teal));
+  color:#fff;font-size:.92rem;font-weight:700;
+  letter-spacing:.01em;border:none;
+  box-shadow:0 8px 32px rgba(201,100,66,.3);
+  transition:all .4s var(--ease);
+  position:relative;overflow:hidden;
+}
+.cta-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.cta-btn:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(201,100,66,.4);}
+.cta-btn:hover::before{opacity:1;}
+.cta-btn:active{transform:scale(.97);}
+
+/* ━━━ SCROLL REVEAL ━━━ */
+.sr{opacity:0;transform:translateY(34px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.sr.on{opacity:1;transform:none;}
+.sr-l{opacity:0;transform:translateX(-32px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.sr-l.on{opacity:1;transform:none;}
+.sr-r{opacity:0;transform:translateX(32px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.sr-r.on{opacity:1;transform:none;}
+
+/* ━━━ COUNTER ANIMATION ━━━ */
+.counter-row{
+  display:flex;gap:48px;margin-top:48px;flex-wrap:wrap;
+}
+.counter-item{text-align:center;}
+.counter-num{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:3rem;font-weight:400;
+  background:linear-gradient(135deg,var(--v),var(--b));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;margin-bottom:6px;
+}
+.counter-label{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--sub2);}
+
+/* ━━━ PORTFOLIO / ÖRNEK SİTELER ━━━ */
+.portfolio-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  margin-top:60px;
+}
+.port-card{
+  position:relative;border-radius:22px;overflow:hidden;
+  border:1px solid var(--fog);
+  background:var(--ink3);
+  transition:all .5s var(--ease);
+  cursor:pointer;
+  group:port;
+}
+.port-card:hover{
+  border-color:rgba(201,100,66,.3);
+  transform:translateY(-8px);
+  box-shadow:0 24px 56px rgba(61,57,41,.14);
+}
+.port-preview{
+  position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;
+  background:var(--ink4);
+}
+.port-preview iframe{
+  width:100%;height:100%;border:none;
+  pointer-events:none;
+  transform:scale(1);
+  transition:transform .6s var(--ease);
+}
+.port-card:hover .port-preview iframe{transform:scale(1.02);}
+.port-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 40%,rgba(61,57,41,.7) 100%);
+  opacity:0;transition:opacity .4s var(--ease);
+  display:flex;align-items:flex-end;justify-content:center;
+  padding:28px;
+}
+.port-card:hover .port-overlay{opacity:1;}
+.port-visit{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 24px;border-radius:100px;
+  background:rgba(255,255,255,.95);
+  color:var(--text);font-size:.82rem;font-weight:700;
+  letter-spacing:.01em;
+  box-shadow:0 4px 20px rgba(0,0,0,.15);
+  transition:all .3s var(--ease);
+}
+.port-visit:hover{background:#fff;transform:scale(1.05);}
+.port-info{padding:22px 24px;}
+.port-name{
+  font-size:1.05rem;font-weight:700;color:var(--text);
+  margin-bottom:6px;letter-spacing:-.01em;
+}
+.port-desc{font-size:.8rem;font-weight:300;line-height:1.7;color:var(--sub);}
+.port-tags{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;}
+.port-tag{
+  font-size:.64rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--v);background:rgba(201,100,66,.08);border:1px solid rgba(201,100,66,.18);
+  padding:3px 10px;border-radius:100px;
+}
+
+@media(max-width:1100px){
+  .portfolio-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:720px){
+  .portfolio-grid{grid-template-columns:1fr;}
+}
+
+/* ━━━ FOOTER ━━━ */
+.ft{
+  border-top:1px solid var(--fog);
+  padding:28px 0;text-align:center;
+  font-size:.75rem;font-weight:400;color:var(--sub2);
+}
+
+/* ━━━ PREFERS REDUCED MOTION ━━━ */
+@media(prefers-reduced-motion:reduce){
+  .hero-shape,.sticky-card-ico{animation:none !important;}
+  .sr,.sr-l,.sr-r{opacity:1;transform:none;transition:none;}
+  .feat-list li{opacity:1;transform:none;transition:none;}
+}
+
+/* ━━━ RESPONSIVE ━━━ */
+@media(max-width:1100px){
+  .wrap{padding:0 40px;}
+  #nav,#nav.scrolled{padding:0 40px;}
+  .sticky-wrap{grid-template-columns:1fr;gap:0;}
+  .sticky-right{position:relative;top:0;margin-bottom:48px;order:-1;}
+  .sticky-card{min-height:220px;}
+  .sticky-item{min-height:auto;padding:36px 0;opacity:1;}
+  .sticky-item:first-child{padding-top:0;}
+  .why-block{padding:40px 32px;}
+  .hero-shape{display:none;}
+}
+@media(max-width:720px){
+  .wrap{padding:0 24px;}
+  #nav,#nav.scrolled{padding:0 24px;}
+  .hero{padding:140px 0 80px;}
+  .hero-intro{font-size:.92rem;}
+  .svc-section{padding:80px 0;}
+  .sticky-section{padding:80px 0;}
+  .s-h{font-size:clamp(2.2rem,8vw,3.2rem);}
+  .counter-row{gap:24px;justify-content:center;}
+  .counter-num{font-size:2rem;}
+  .sticky-title{font-size:1.2rem;}
+  .sticky-desc{font-size:.85rem;}
+  .sticky-card{min-height:180px;}
+  .sticky-card-content{padding:32px 24px;}
+  .sticky-card-ico{font-size:2.2rem;}
+  .sticky-card-label{font-size:1rem;}
+  .why-block{padding:28px 20px;border-radius:18px;}
+  .why-text{font-size:.85rem;}
+  .cta-btn{padding:14px 28px;font-size:.85rem;}
+  .cta-bottom-text{font-size:.88rem;}
+  .port-name{font-size:.92rem;}
+  .port-desc{font-size:.75rem;}
+}
+@media(max-width:480px){
+  .wrap{padding:0 18px;}
+  #nav,#nav.scrolled{padding:0 18px;}
+  .hero{padding:120px 0 60px;}
+  .s-h{font-size:clamp(1.9rem,8vw,2.8rem);}
+  .hero-intro{font-size:.85rem;line-height:1.8;}
+  .counter-row{gap:20px;}
+  .counter-num{font-size:1.8rem;}
+  .counter-label{font-size:.65rem;}
+  .sticky-ico{width:44px;height:44px;font-size:1.1rem;}
+  .sticky-title{font-size:1.05rem;}
+  .sticky-list li{font-size:.8rem;padding:8px 0;}
+  .back-btn{font-size:.75rem;padding:6px 12px;}
+  .nav-logo-text{font-size:1.1rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="noise"></div>
+
+<!-- ══════════════ NAV ══════════════ -->
+<nav id="nav">
+  <a href="nexify-website.html" class="nav-logo-text">Nexify</a>
+  <div class="nav-links">
+    <a href="nexify-website.html" class="back-btn">← Ana Sayfa</a>
+  </div>
+</nav>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero">
+  <div class="hero-shape hs1"></div>
+  <div class="hero-shape hs2"></div>
+  <div class="hero-shape hs3"></div>
+  <div class="wrap">
+    <div class="stag sr">Çözümlerimiz</div>
+    <h1 class="s-h sr">Hizmet<span class="acc">lerimiz</span></h1>
+    <p class="hero-intro sr">
+      İşletmenizin dijital dünyada güçlü bir şekilde yer almasını sağlamak için modern, hızlı ve tamamen işletmenize özel çözümler sunuyoruz. Günümüzde müşterilerin büyük bir kısmı bir işletmeyi ziyaret etmeden önce internetten araştırma yapıyor. Profesyonel bir web sitesi ve dijital altyapı ise işletmenizin güvenilirliğini ve tercih edilme oranını doğrudan artırır. Biz de tam olarak bu noktada devreye giriyoruz.
+    </p>
+    <div class="counter-row sr">
+      <div class="counter-item">
+        <div class="counter-num" data-target="100" data-suffix="+">0+</div>
+        <div class="counter-label">Tamamlanan Proje</div>
+      </div>
+      <div class="counter-item">
+        <div class="counter-num" data-target="99" data-suffix="%">0%</div>
+        <div class="counter-label">Müşteri Memnuniyeti</div>
+      </div>
+      <div class="counter-item">
+        <div class="counter-num" data-target="7" data-suffix="/24">0/24</div>
+        <div class="counter-label">Destek</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════ STICKY SCROLL HİZMETLER ══════════════ -->
+<section class="sticky-section">
+  <div class="wrap">
+    <div class="sticky-wrap">
+
+      <!-- Sol: Scroll eden içerikler -->
+      <div class="sticky-left">
+
+        <div class="sticky-item" data-index="0">
+          <div class="sticky-ico">🌐</div>
+          <h3 class="sticky-title">Profesyonel Web Sitesi Tasarımı</h3>
+          <p class="sticky-desc">
+            İşletmenize özel olarak tasarlanan modern ve profesyonel web siteleri hazırlıyoruz. Sıradan, hazır şablon siteler yerine markanızın kimliğine uygun, özgün tasarımlar geliştiriyoruz. Tüm web sitelerimiz mobil uyumlu, hızlı ve kullanıcı dostu olacak şekilde hazırlanır.
+          </p>
+          <p class="sticky-desc">
+            Web sitelerimiz sadece görsel olarak güzel değil, aynı zamanda işletmenizi daha iyi tanıtan ve müşterilerinize güven veren bir yapıya sahiptir. Hizmetlerinizi, ürünlerinizi ve iletişim bilgilerinizi en etkili şekilde sunarak potansiyel müşterilerin sizinle daha kolay iletişime geçmesini sağlarız.
+          </p>
+        </div>
+
+        <div class="sticky-item" data-index="1">
+          <div class="sticky-ico">📲</div>
+          <h3 class="sticky-title">QR Kod Menü Sistemi</h3>
+          <p class="sticky-desc">
+            Kafe, restoran ve benzeri işletmeler için QR Kod Menü sistemi de sunuyoruz. Bu sistem sayesinde müşterileriniz masalarda bulunan QR kodu telefonlarıyla okutarak menünüze anında ulaşabilir.
+          </p>
+          <p class="sticky-desc">
+            QR menülerinizi tamamen işletmenize özel tasarlıyoruz. Menü kategorileri, ürün görselleri, fiyatlar ve tasarım tamamen markanıza uygun şekilde hazırlanır.
+          </p>
+          <ul class="sticky-list">
+            <li>Müşteriler menüye hızlı ve temassız şekilde erişir</li>
+            <li>Menü değişiklikleri anında güncellenebilir</li>
+            <li>Baskı maliyetleri ortadan kalkar</li>
+            <li>Daha modern ve profesyonel bir müşteri deneyimi</li>
+            <li>Telefon uyumlu, hızlı ve şık menü arayüzü</li>
+          </ul>
+        </div>
+
+        <div class="sticky-item" data-index="2">
+          <div class="sticky-ico">🎨</div>
+          <h3 class="sticky-title">Özgün Tasarım & Marka Kimliği</h3>
+          <p class="sticky-desc">
+            Markanızın dijital dünyada fark yaratmasını sağlıyoruz. Renk paleti, tipografi ve görsel dil gibi tüm tasarım unsurlarını markanıza özel olarak belirliyoruz. Hazır şablonlar yerine sıfırdan özgün tasarımlar geliştiriyoruz.
+          </p>
+        </div>
+
+        <div class="sticky-item" data-index="3">
+          <div class="sticky-ico">⚡</div>
+          <h3 class="sticky-title">Hız, SEO & Performans</h3>
+          <p class="sticky-desc">
+            Tüm projelerimiz Google PageSpeed 90+ hedefi ile optimize edilir. Teknik SEO altyapısı, mobil uyumluluk, CDN entegrasyonu ve görsel optimizasyonu standart olarak dahildir. İşletmenizin Google'da üst sıralarda çıkmasını sağlıyoruz.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Sağ: Sticky kart -->
+      <div class="sticky-right">
+        <div class="sticky-card" id="stickyCard">
+          <div class="sticky-card-glow"></div>
+          <div class="sticky-card-content" id="stickyCardContent">
+            <div class="sticky-card-ico">🌐</div>
+            <div class="sticky-card-label">Web Sitesi Tasarımı</div>
+            <div class="sticky-card-features" id="stickyCardFeatures">
+              <div class="scf-item"><span class="scf-dot"></span>Mobil Uyumlu</div>
+              <div class="scf-item"><span class="scf-dot"></span>Hızlı Yükleme</div>
+              <div class="scf-item"><span class="scf-dot"></span>Özgün Tasarım</div>
+              <div class="scf-item"><span class="scf-dot"></span>SEO Uyumlu</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ÖRNEK SİTELER ══════════════ -->
+<section class="svc-section" style="background:var(--ink);">
+  <div class="wrap">
+    <div class="stag sr">Portföy</div>
+    <h2 class="s-h sr" style="font-size:clamp(2rem,4vw,3.5rem);">Örnek <span class="acc">Çalışmalarımız</span></h2>
+    <p class="svc-text sr" style="max-width:560px;">Müşterilerimiz için geliştirdiğimiz projelerden bazılarını inceleyebilirsiniz.</p>
+
+    <div class="portfolio-grid">
+
+      <div class="port-card sr-l">
+        <div class="port-preview">
+          <iframe src="https://wakecup.vercel.app/" loading="lazy" sandbox="allow-scripts allow-same-origin" title="WakeCup"></iframe>
+          <a href="https://wakecup.vercel.app/" target="_blank" rel="noopener" class="port-overlay">
+            <span class="port-visit">Siteyi Ziyaret Et →</span>
+          </a>
+        </div>
+        <div class="port-info">
+          <div class="port-name">WakeCup</div>
+          <div class="port-desc">Kafe işletmesi için tasarlanan modern ve şık web sitesi. Menü, hakkında ve iletişim bölümlerini içerir.</div>
+          <div class="port-tags">
+            <span class="port-tag">Web Sitesi</span>
+            <span class="port-tag">Kafe</span>
+            <span class="port-tag">Responsive</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="port-card sr">
+        <div class="port-preview">
+          <iframe src="https://lumeartcoffe.vercel.app/" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Lume Art Coffee"></iframe>
+          <a href="https://lumeartcoffe.vercel.app/" target="_blank" rel="noopener" class="port-overlay">
+            <span class="port-visit">Siteyi Ziyaret Et →</span>
+          </a>
+        </div>
+        <div class="port-info">
+          <div class="port-name">Lume Art Coffee</div>
+          <div class="port-desc">Butik kahve dükkanı için hazırlanan estetik ve kullanıcı dostu web sitesi tasarımı.</div>
+          <div class="port-tags">
+            <span class="port-tag">Web Sitesi</span>
+            <span class="port-tag">Kahve</span>
+            <span class="port-tag">Tasarım</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="port-card sr-r">
+        <div class="port-preview">
+          <iframe src="https://babacancigkoftemenu.vercel.app/index.html" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Babacan Çiğköfte Menü"></iframe>
+          <a href="https://babacancigkoftemenu.vercel.app/index.html" target="_blank" rel="noopener" class="port-overlay">
+            <span class="port-visit">Menüyü İncele →</span>
+          </a>
+        </div>
+        <div class="port-info">
+          <div class="port-name">Babacan Çiğköfte</div>
+          <div class="port-desc">Çiğköfte işletmesi için hazırlanan QR kod ile erişilebilen dijital menü sistemi.</div>
+          <div class="port-tags">
+            <span class="port-tag">QR Menü</span>
+            <span class="port-tag">Restoran</span>
+            <span class="port-tag">Mobil Uyumlu</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ NEDEN BİZ ══════════════ -->
+<section class="svc-section" style="background:var(--ink);">
+  <div class="wrap">
+    <div class="stag sr">Farkımız</div>
+    <h2 class="s-h sr" style="font-size:clamp(2rem,4vw,3.5rem);">Neden <span class="acc">Biz?</span></h2>
+    <div class="why-block sr">
+      <p class="why-text">
+        Amacımız sadece bir web sitesi yapmak değil, işletmenizin dijitalde daha güçlü görünmesini sağlamaktır. Modern tasarım anlayışı, hızlı altyapı ve kullanıcı deneyimi odaklı çalışmalarımız sayesinde işletmenizin rakiplerinden bir adım öne geçmesine yardımcı oluyoruz.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CTA ══════════════ -->
+<section class="cta-bottom">
+  <div class="wrap">
+    <div class="stag sr">İletişim</div>
+    <h2 class="s-h sr" style="font-size:clamp(2rem,4vw,3.5rem);">Haydi <span class="acc">Başlayalım</span></h2>
+    <p class="cta-bottom-text sr">
+      Eğer siz de işletmeniz için profesyonel bir web sitesi veya QR kod menü sistemi yaptırmak istiyorsanız bizimle iletişime geçebilirsiniz. İşletmenize özel çözümler sunarak dijitalde güçlü bir marka oluşturmanıza yardımcı olmaktan memnuniyet duyarız.
+    </p>
+    <a href="https://wa.me/905514547724" target="_blank" rel="noopener" class="cta-btn sr">
+      Bizimle İletişime Geçin <span>→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<div class="ft">
+  <div class="wrap">© 2025 Nexify — Tüm hakları saklıdır.</div>
+</div>
+
+<script>
+/* ── Nav scroll ── */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>30);});
+
+/* ── Scroll reveal ── */
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});
+},{threshold:.15});
+document.querySelectorAll('.sr,.sr-l,.sr-r').forEach(el=>obs.observe(el));
+
+/* ── Sticky scroll reveal ── */
+const stickyItems=document.querySelectorAll('.sticky-item');
+const stickyCard=document.getElementById('stickyCard');
+const stickyContent=document.getElementById('stickyCardContent');
+const cardData=[
+  {ico:'🌐',label:'Web Sitesi Tasarımı',features:['Mobil Uyumlu','Hızlı Yükleme','Özgün Tasarım','SEO Uyumlu']},
+  {ico:'📲',label:'QR Kod Menü',features:['Temassız Erişim','Anlık Güncelleme','Maliyet Tasarrufu','Şık Arayüz']},
+  {ico:'🎨',label:'Marka Kimliği',features:['Renk Paleti','Tipografi','Görsel Dil','Logo Uyumu']},
+  {ico:'⚡',label:'Hız & Performans',features:['PageSpeed 90+','Teknik SEO','CDN','Görsel Optimizasyon']},
+];
+let currentStickyIndex=-1;
+
+function updateStickyCard(index){
+  if(index===currentStickyIndex||!cardData[index])return;
+  currentStickyIndex=index;
+  stickyContent.classList.add('switching');
+  stickyCard.setAttribute('data-theme',index);
+  setTimeout(()=>{
+    const d=cardData[index];
+    stickyContent.querySelector('.sticky-card-ico').textContent=d.ico;
+    stickyContent.querySelector('.sticky-card-label').textContent=d.label;
+    const featEl=document.getElementById('stickyCardFeatures');
+    featEl.innerHTML=d.features.map(f=>`<div class="scf-item"><span class="scf-dot"></span>${f}</div>`).join('');
+    stickyContent.classList.remove('switching');
+  },300);
+}
+
+if(window.innerWidth>1100){
+  /* Desktop: sticky scroll with opacity */
+  const stickyObs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const idx=parseInt(e.target.dataset.index);
+        stickyItems.forEach(it=>it.classList.remove('active'));
+        e.target.classList.add('active');
+        updateStickyCard(idx);
+      }
+    });
+  },{threshold:0.35,rootMargin:'-20% 0px -40% 0px'});
+  stickyItems.forEach(el=>stickyObs.observe(el));
+  if(stickyItems[0])stickyItems[0].classList.add('active');
+  updateStickyCard(0);
+}else{
+  /* Mobile/tablet: card still updates per section */
+  stickyItems.forEach(it=>it.classList.add('active'));
+  updateStickyCard(0);
+  const mobStickyObs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        updateStickyCard(parseInt(e.target.dataset.index));
+      }
+    });
+  },{threshold:0.3});
+  stickyItems.forEach(el=>mobStickyObs.observe(el));
+}
+
+/* ── Feature list staggered reveal ── */
+const listObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const items=e.target.querySelectorAll('li');
+      items.forEach((li,i)=>{
+        setTimeout(()=>li.classList.add('on'),i*120);
+      });
+      listObs.unobserve(e.target);
+    }
+  });
+},{threshold:.2});
+document.querySelectorAll('.feat-list').forEach(el=>listObs.observe(el));
+
+/* ── Bento card mouse glow ── */
+document.querySelectorAll('.bento-card').forEach(c=>{
+  c.addEventListener('mousemove',e=>{
+    const r=c.getBoundingClientRect();
+    c.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
+    c.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
+  });
+});
+
+/* ── Counter animation ── */
+const counterObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const el=e.target;
+      const target=parseInt(el.dataset.target);
+      const suffix=el.dataset.suffix||'';
+      let current=0;
+      const step=Math.ceil(target/40);
+      const interval=setInterval(()=>{
+        current+=step;
+        if(current>=target){current=target;clearInterval(interval);}
+        el.textContent=current+suffix;
+      },35);
+      counterObs.unobserve(el);
+    }
+  });
+},{threshold:.5});
+document.querySelectorAll('.counter-num[data-target]').forEach(el=>counterObs.observe(el));
+</script>
+
+</body>
+</html>
